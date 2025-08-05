@@ -7,7 +7,7 @@ When new text is added, typical implementations cause existing text to jump abru
 **Left (Normal)**: Abrupt scrolling  
 **Right (Sliding)**: Smooth slide-in animation
 
-[Demo](https://sample-by-jsakamoto.github.io/React-SlidingTextBox/)
+[Demo](https://sample-by-jsakamoto.github.io/Blazor-SlidingTextBox/)
 
 ![](.assets/demo-video.gif)
 
