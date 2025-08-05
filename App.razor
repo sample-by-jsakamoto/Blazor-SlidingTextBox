@@ -1,0 +1,65 @@
+﻿<header>
+    <button @onclick="OnClickAddNew">Add New Block</button>
+    <button @onclick="OnClickAppendText">Append Text</button>
+    <button @onclick="OnClickToggleOutline">Toggle Outline</button>
+</header>
+
+<main class="@CssClass">
+    <div class="left">
+        <h3>Normal</h3>
+        <div class="blocks">
+            @foreach (var block in _blocks)
+            {
+                <NormalTextBox @key="block.Id" Text="@block.Text" />
+            }
+        </div>
+    </div>
+    <div class="right">
+        <h3>Sliding</h3>
+        <div class="blocks">
+            @foreach (var block in _blocks)
+            {
+                <SlidingTextBox @key="block.Id" Text="@block.Text" />
+            }
+        </div>
+    </div>
+</main>
+
+@code
+{
+    public class Block
+    {
+        public int Id { get; set; }
+        public string Text { get; set; } = "";
+    }
+
+    private List<Block> _blocks = [];
+
+    private bool _showOutline = false;
+
+    private string CssClass => _showOutline ? "show-outline" : "";
+
+
+    private void OnClickAddNew()
+    {
+        _blocks.Insert(0, new Block
+        {
+            Id = _blocks.Count + 1,
+            Text = $"Block {_blocks.Count + 1}: {LoremGenerator.GetNext()}"
+        });
+    }
+
+    private void OnClickAppendText()
+    {
+        var lastBlock = _blocks.FirstOrDefault();
+        if (lastBlock != null)
+        {
+            lastBlock.Text += " " + LoremGenerator.GetNext();
+        }
+    }
+
+    private void OnClickToggleOutline()
+    {
+        _showOutline = !_showOutline;
+    }
+}

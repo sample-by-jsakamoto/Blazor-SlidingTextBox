@@ -1,0 +1,46 @@
+﻿@implements IAsyncDisposable
+@inject IJSRuntime JSRuntime
+
+<div @ref="_containerBoxRef" class="@CssClass">
+    <div class="content-box">
+        @this.Text
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string? Text { get; set; }
+
+    private ElementReference _containerBoxRef;
+
+    private IJSObjectReference? _handler;
+
+    private bool _initialRendering = true;
+
+    private string CssClass => "container-box" + (_initialRendering ? " initial" : "");
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _initialRendering = false;
+
+            await using var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./Components/SlidingTextBox.razor.js");
+            _handler = await module.InvokeAsync<IJSObjectReference>("initialize", _containerBoxRef);
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_handler is not null)
+        {
+            try
+            {
+                await _handler.InvokeVoidAsync("dispose");
+                await _handler.DisposeAsync();
+            }
+            catch (JSDisconnectedException) { /* Ignore if JS runtime is disconnected */ }
+            _handler = null;
+        }
+    }
+}
