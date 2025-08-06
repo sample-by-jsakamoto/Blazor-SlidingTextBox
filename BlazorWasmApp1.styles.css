@@ -1,0 +1,64 @@
+/* /App.razor.rz.scp.css */
+header[b-myefwud9vq] {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+main[b-myefwud9vq] {
+    display: flex;
+    --container-box-outline-color: transparent;
+    --content-box-outline-color: transparent;
+}
+
+    main.show-outline[b-myefwud9vq] {
+        --container-box-outline-color: darkgoldenrod;
+        --content-box-outline-color: royalblue;
+    }
+
+.left[b-myefwud9vq], .right[b-myefwud9vq] {
+    flex: 1;
+}
+
+.blocks[b-myefwud9vq] {
+    min-height: 50vh;
+    padding: 0 8px;
+}
+
+.left .blocks[b-myefwud9vq] {
+    border-right: dashed 2px silver;
+}
+
+h3[b-myefwud9vq] {
+    text-align: center;
+}
+/* /Components/NormalTextBox.razor.rz.scp.css */
+.container-box[b-034bqqbkgx] {
+    outline: 2px dashed var(--container-box-outline-color);
+    outline-offset: -3px;
+}
+
+.content-box[b-034bqqbkgx] {
+    outline: 2px dashed var(--content-box-outline-color);
+    outline-offset: -8px;
+    padding: 8px 24px;
+}
+/* /Components/SlidingTextBox.razor.rz.scp.css */
+.container-box[b-7b3ibi7ipr] {
+    outline: 2px dashed var(--container-box-outline-color);
+    outline-offset: -3px;
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+    transition: min-height 0.5s linear;
+}
+
+.content-box[b-7b3ibi7ipr] {
+    outline: 2px dashed var(--content-box-outline-color);
+    outline-offset: -8px;
+    padding: 8px 24px;
+    position: absolute;
+}
+
+.container-box.initial .content-box[b-7b3ibi7ipr] {
+    bottom: 0;
+}
