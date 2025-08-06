@@ -1,10 +1,11 @@
 export const initialize = (containerBox: HTMLElement) => {
 
+    const contentBox = containerBox.querySelector<HTMLElement>(".content-box");
+
     const resizeObserver = new ResizeObserver(_ => {
         containerBox.style.minHeight = contentBox?.scrollHeight + "px";
     });
 
-    const contentBox = containerBox.querySelector<HTMLElement>(".content-box");
     if (contentBox) resizeObserver.observe(contentBox);
 
     return ({
@@ -13,9 +14,4 @@ export const initialize = (containerBox: HTMLElement) => {
             resizeObserver.disconnect();
         }
     });
-}
-
-export const updateHeight = (containerBox: HTMLElement) => {
-    const contentBox = containerBox.querySelector<HTMLElement>(".content-box");
-    containerBox.style.minHeight = contentBox?.scrollHeight + "px";
 }
